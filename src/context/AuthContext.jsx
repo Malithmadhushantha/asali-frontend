@@ -2,7 +2,10 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+// Use environment variable for API URL, fallback for development
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+console.log('API URL configured as:', API_URL);
 
 const AuthContext = createContext();
 

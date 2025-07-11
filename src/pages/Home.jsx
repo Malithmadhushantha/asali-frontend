@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { formatCurrency } from '../utils/currency';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -26,10 +26,30 @@ const Home = () => {
   };
 
   const categories = [
-    { name: 'Shirts', image: '/images/categories/shirts.jpg', path: '/products?category=shirts' },
-    { name: 'Dresses', image: '/images/categories/dresses.jpg', path: '/products?category=dresses' },
-    { name: 'Pants', image: '/images/categories/pants.jpg', path: '/products?category=pants' },
-    { name: 'Accessories', image: '/images/categories/accessories.png', path: '/products?category=accessories' }
+    { 
+      name: 'Shirts', 
+      image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300&h=300&fit=crop&crop=center',
+      fallback: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300&h=300&fit=crop',
+      path: '/products?category=shirts' 
+    },
+    { 
+      name: 'Dresses', 
+      image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop&crop=center',
+      fallback: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=300&h=300&fit=crop',
+      path: '/products?category=dresses' 
+    },
+    { 
+      name: 'Pants', 
+      image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop&crop=center',
+      fallback: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=300&fit=crop',
+      path: '/products?category=pants' 
+    },
+    { 
+      name: 'Accessories', 
+      image: 'https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=300&h=300&fit=crop&crop=center',
+      fallback: 'https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?w=300&h=300&fit=crop',
+      path: '/products?category=accessories' 
+    }
   ];
 
   const handleImageError = (e, fallbackSrc) => {
@@ -72,8 +92,9 @@ const Home = () => {
             <div className="hidden lg:block">
               <div className="relative">
                 <img
-                  src="/images/hero/fashion-model.jpg"
+                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&h=600&fit=crop&crop=center"
                   alt="Fashion Model"
+                  onError={(e) => handleImageError(e, 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&h=600&fit=crop')}
                   className="rounded-lg shadow-2xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-600/20 to-transparent rounded-lg"></div>
