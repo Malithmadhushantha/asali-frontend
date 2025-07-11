@@ -57,6 +57,7 @@ const Login = () => {
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
+    console.log('Google login initiated...');
     const result = await googleLogin(credentialResponse);
     
     if (result.success) {
@@ -67,6 +68,7 @@ const Login = () => {
 
   const handleGoogleError = () => {
     console.error('Google login failed');
+    toast.error('Google login failed. Please try again or use email login.');
   };
 
   const handleChange = (e) => {

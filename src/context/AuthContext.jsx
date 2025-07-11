@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_URL = 'http://localhost:5000/api'; // Change this to your backend URL
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const AuthContext = createContext();
 
@@ -149,13 +149,23 @@ export const AuthProvider = ({ children }) => {
     try {
       dispatch({ type: 'LOGIN_START' });
       
+      if (!credentialResponse?.credential) {
+        throw new Error('No credential received from Google');
+      }
+      
       // Decode the JWT token from Google
       const decodedToken = JSON.parse(atob(credentialResponse.credential.split('.')[1]));
+      
+      // Validate required fields
+      if (!decodedToken.email || !decodedToken.name) {
+        throw new Error('Incomplete profile information from Google');
+      }
       
       const response = await axios.post(`${API_URL}/auth/google-login`, {
         email: decodedToken.email,
         name: decodedToken.name,
-        googleId: decodedToken.sub
+        googleId: decodedToken.sub,
+        picture: decodedToken.picture || null
       });
 
       const { token, user } = response.data;
@@ -167,10 +177,11 @@ export const AuthProvider = ({ children }) => {
         payload: { user, token }
       });
 
-      toast.success('Google login successful!');
+      toast.success(`Welcome ${user.name}! Google login successful.`);
       return { success: true };
     } catch (error) {
-      const message = error.response?.data?.message || 'Google login failed';
+      console.error('Google login error:', error);
+      const message = error.response?.data?.message || error.message || 'Google login failed';
       dispatch({
         type: 'LOGIN_FAILURE',
         payload: message

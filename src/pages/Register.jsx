@@ -75,6 +75,7 @@ const Register = () => {
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
+    console.log('Google registration initiated...');
     const result = await googleLogin(credentialResponse);
     
     if (result.success) {
@@ -84,6 +85,7 @@ const Register = () => {
 
   const handleGoogleError = () => {
     console.error('Google registration failed');
+    toast.error('Google registration failed. Please try again or use email registration.');
   };
 
   const handleChange = (e) => {
