@@ -1,0 +1,19 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_GOOGLE_CLIENT_ID": "@vite_google_client_id",
+    "VITE_API_URL": "@vite_api_url",
+    "VITE_APP_NAME": "Asali House of Fashion",
+    "VITE_APP_URL": "@vite_app_url"
+  }
+}
