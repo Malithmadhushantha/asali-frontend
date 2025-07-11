@@ -20,7 +20,7 @@ const Checkout = () => {
     city: user?.address?.city || '',
     state: user?.address?.state || '',
     zipCode: user?.address?.zipCode || '',
-    country: user?.address?.country || 'United States',
+    country: user?.address?.country || 'Sri Lanka',
     phone: user?.phone || ''
   });
   const [errors, setErrors] = useState({});
