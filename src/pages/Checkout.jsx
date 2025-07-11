@@ -6,7 +6,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { formatCurrency } from '../utils/currency';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Checkout = () => {
   const { items, getCartTotal, clearCart } = useCart();
@@ -20,7 +20,7 @@ const Checkout = () => {
     city: user?.address?.city || '',
     state: user?.address?.state || '',
     zipCode: user?.address?.zipCode || '',
-    country: user?.address?.country || 'Sri Lanka',
+    country: user?.address?.country || 'United States',
     phone: user?.phone || ''
   });
   const [errors, setErrors] = useState({});
