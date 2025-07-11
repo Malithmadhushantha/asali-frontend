@@ -99,8 +99,14 @@ export const AuthProvider = ({ children }) => {
         payload: { user, token }
       });
 
-      toast.success('Login successful!');
-      return { success: true };
+      // Role-based welcome message
+      if (user.role === 'admin') {
+        toast.success(`Welcome back, Admin ${user.name}! You have full system access.`);
+      } else {
+        toast.success(`Welcome back, ${user.name}! Happy shopping at Asali House of Fashion.`);
+      }
+      
+      return { success: true, user };
     } catch (error) {
       const message = error.response?.data?.message || 'Login failed';
       dispatch({
@@ -112,7 +118,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (name, email, password, role = 'customer') => {
+  const register = async (name, email, password) => {
     try {
       dispatch({ type: 'LOGIN_START' });
       
@@ -120,7 +126,7 @@ export const AuthProvider = ({ children }) => {
         name,
         email,
         password,
-        role
+        role: 'customer' // Always register as customer
       });
 
       const { token, user } = response.data;
@@ -132,7 +138,7 @@ export const AuthProvider = ({ children }) => {
         payload: { user, token }
       });
 
-      toast.success('Registration successful!');
+      toast.success('Registration successful! Welcome to Asali House of Fashion.');
       return { success: true };
     } catch (error) {
       const message = error.response?.data?.message || 'Registration failed';
@@ -177,8 +183,14 @@ export const AuthProvider = ({ children }) => {
         payload: { user, token }
       });
 
-      toast.success(`Welcome ${user.name}! Google login successful.`);
-      return { success: true };
+      // Role-based welcome message for Google login
+      if (user.role === 'admin') {
+        toast.success(`Welcome ${user.name}! Google admin login successful.`);
+      } else {
+        toast.success(`Welcome ${user.name}! Google login successful.`);
+      }
+      
+      return { success: true, user };
     } catch (error) {
       console.error('Google login error:', error);
       const message = error.response?.data?.message || error.message || 'Google login failed';

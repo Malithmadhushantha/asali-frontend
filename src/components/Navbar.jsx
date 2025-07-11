@@ -112,6 +112,12 @@ const Navbar = () => {
                         >
                           Admin Dashboard
                         </Link>
+                        <Link
+                          to="/admin/users"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          User Management
+                        </Link>
                       </>
                     )}
                     <hr className="my-1" />
@@ -203,13 +209,22 @@ const Navbar = () => {
                     My Orders
                   </Link>
                   {user?.role === 'admin' && (
-                    <Link
-                      to="/admin"
-                      className="block px-3 py-2 text-gray-700 hover:text-primary-600"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Admin Dashboard
-                    </Link>
+                    <>
+                      <Link
+                        to="/admin"
+                        className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                      <Link
+                        to="/admin/users"
+                        className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        User Management
+                      </Link>
+                    </>
                   )}
                   <button
                     onClick={handleLogout}

@@ -51,8 +51,17 @@ const Login = () => {
     const result = await login(formData.email, formData.password);
     
     if (result.success) {
-      const from = location.state?.from?.pathname || '/';
-      navigate(from, { replace: true });
+      // Get the user from AuthContext to check role
+      const from = location.state?.from?.pathname;
+      
+      // Role-based redirect logic
+      if (from) {
+        // If there was a specific page they were trying to access, go there
+        navigate(from, { replace: true });
+      } else {
+        // Default redirect based on role
+        navigate('/', { replace: true }); // Always go to home first
+      }
     }
   };
 
@@ -61,8 +70,14 @@ const Login = () => {
     const result = await googleLogin(credentialResponse);
     
     if (result.success) {
-      const from = location.state?.from?.pathname || '/';
-      navigate(from, { replace: true });
+      const from = location.state?.from?.pathname;
+      
+      // Role-based redirect logic for Google login
+      if (from) {
+        navigate(from, { replace: true });
+      } else {
+        navigate('/', { replace: true }); // Always go to home first
+      }
     }
   };
 
@@ -213,7 +228,8 @@ const Login = () => {
             {/* Admin Login Notice */}
             <div className="mt-6 p-4 bg-blue-50 rounded-lg">
               <p className="text-sm text-blue-800">
-                <strong>Admin Access:</strong> Use your admin credentials to access the admin dashboard.
+                <strong>New to Asali House of Fashion?</strong> All new registrations are customer accounts. 
+                Admin access is granted by existing administrators through the user management system.
               </p>
             </div>
           </form>

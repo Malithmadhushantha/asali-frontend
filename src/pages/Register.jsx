@@ -9,8 +9,8 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    role: 'customer'
+    confirmPassword: ''
+    // Removed role - will always be 'customer'
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -65,8 +65,8 @@ const Register = () => {
     const result = await register(
       formData.name.trim(),
       formData.email.trim(),
-      formData.password,
-      formData.role
+      formData.password
+      // Always register as customer - admins are created by other admins
     );
     
     if (result.success) {
@@ -160,22 +160,6 @@ const Register = () => {
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">{errors.email}</p>
               )}
-            </div>
-
-            <div>
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                Account Type
-              </label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                className="mt-1 input-field"
-              >
-                <option value="customer">Customer</option>
-                <option value="admin">Admin</option>
-              </select>
             </div>
 
             <div>
@@ -294,6 +278,15 @@ const Register = () => {
                   shape="rectangular"
                 />
               </div>
+            </div>
+
+            {/* Account Type Notice */}
+            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <p className="text-sm text-green-800">
+                <strong>🛍️ Customer Account:</strong> All new registrations create customer accounts. 
+                You'll have access to shop, place orders, and manage your profile. 
+                Admin privileges are granted by existing administrators.
+              </p>
             </div>
           </form>
         </div>

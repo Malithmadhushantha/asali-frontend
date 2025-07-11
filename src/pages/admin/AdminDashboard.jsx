@@ -8,7 +8,8 @@ import {
   ClockIcon,
   CheckCircleIcon,
   TruckIcon,
-  PlusIcon
+  PlusIcon,
+  Cog6ToothIcon
 } from '@heroicons/react/24/outline';
 import { formatCurrency } from '../../utils/currency';
 
@@ -282,6 +283,15 @@ const AdminDashboard = () => {
                   <div className="flex items-center space-x-3">
                     <ClockIcon className="h-5 w-5 text-gray-600" />
                     <span className="font-medium text-gray-900">View All Orders</span>
+                  </div>
+                </Link>
+                <Link
+                  to="/admin/users"
+                  className="block w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Cog6ToothIcon className="h-5 w-5 text-gray-600" />
+                    <span className="font-medium text-gray-900">User Management</span>
                   </div>
                 </Link>
                 <Link

@@ -25,6 +25,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
 import AdminOrders from './pages/admin/AdminOrders';
 import AddProduct from './pages/admin/AddProduct';
+import UserManagement from './pages/admin/UserManagement';
 
 // Replace this with your actual Google Client ID from Google Cloud Console
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID_HERE";
@@ -87,6 +88,11 @@ function App() {
                   <Route path="/admin/orders" element={
                     <ProtectedRoute adminOnly>
                       <AdminOrders />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/admin/users" element={
+                    <ProtectedRoute adminOnly>
+                      <UserManagement />
                     </ProtectedRoute>
                   } />
                 </Routes>
