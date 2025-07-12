@@ -467,7 +467,26 @@ const AddProduct = () => {
                 )}
               </div>
             </div>
-
+              {/* Action Buttons */}
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="space-y-4">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? 'Adding Product...' : 'Add Product'}
+                  </button>
+                  
+                  <button
+                    type="button"
+                    onClick={() => navigate('/admin/products')}
+                    className="w-full btn-secondary"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Preview */}
@@ -535,26 +554,7 @@ const AddProduct = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="space-y-4">
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {loading ? 'Adding Product...' : 'Add Product'}
-                  </button>
-                  
-                  <button
-                    type="button"
-                    onClick={() => navigate('/admin/products')}
-                    className="w-full btn-secondary"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
+
             </div>
           </div>
         </form>
